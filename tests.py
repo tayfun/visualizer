@@ -1,6 +1,8 @@
 import unittest
 import sys
-sys.path.append("/home/tayfun/projects/appengine/google_appengine/")
+import os
+# We must modify path to use appengine API from command line.
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 
 from models import TextParser
 
@@ -60,7 +62,7 @@ class TestTextParser(unittest.TestCase):
         Stanford University. It's a good start to understand Lean Startup.
         Here is a presentation
         you need to see as well
-        bit.ly/abc
+        bit.ly/xyz
         NYTIme recently covered him too
         www.a.long.and.weird.url.com/yep
         Steve
@@ -69,8 +71,8 @@ class TestTextParser(unittest.TestCase):
         tp.extract_urls()
         self.assertEqual(tp.urls,
             ['http://bit.ly/abc',
-             'bit.ly/abc',
-             'www.a.long.and.weird.url.com/yep',
+             'http://bit.ly/xyz',
+             'http://www.a.long.and.weird.url.com/yep',
             ])
 
     def test_embed_codes(self):
