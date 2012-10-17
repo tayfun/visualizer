@@ -94,7 +94,10 @@ class TextParser(object):
         self.urls = []
         iterator = self.url_regex.finditer(self.text)
         for match in iterator:
-            self.urls.append(match.group())
+            url = match.group()
+            if not url.startswith('http://'):
+                url = 'http://' + url
+            self.urls.append(url)
 
     def fetch_urls(self):
         self.extract_urls()
