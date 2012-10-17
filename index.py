@@ -12,6 +12,7 @@ class MainPage(webapp2.RequestHandler):
         else:
             tp = TextParser(text)
             self.response.out.write(json.dumps(tp.fetch_urls()))
+        self.response.headers.add_header("Content-type", "application/json")
 
     def post(self):
         self.get()
